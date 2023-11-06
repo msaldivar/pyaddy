@@ -2,12 +2,8 @@
 Class for the addy.io python bindings
 """
 
-
-
 import requests
-import json
 import configparser
-import os
 
 class Addy:
     URL = "https://app.addy.io/api/v1/"
