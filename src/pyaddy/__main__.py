@@ -18,10 +18,5 @@ def main() -> None:
     print(f'api details {resp}')
 
 
-
-
-
-
-
 if __name__ == "__main__":
     main()
