@@ -5,6 +5,7 @@ Maurice Saldivar
 
 """
 import click
+import json
 from addy import AddyApiDetails
 
 @click.group()
@@ -29,6 +30,14 @@ def check_api_key_details():
     resp = ac.get_api_token_details()
 
     click.echo(f"API details: {resp}")
+
+@cli.command(name="get-acount-details", help="Get all account details associated with api key")
+def get_account_details():
+    """Get all account details associated with api key"""
+    ac = AddyApiDetails()
+    resp = ac.get_account_details()
+
+    click.echo(f"Account Details: \n {json.dumps(resp, indent=4)}")
 
 if __name__ == "__main__":
     cli()

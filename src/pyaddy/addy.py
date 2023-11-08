@@ -48,3 +48,14 @@ class AddyApiDetails:
         
         return response.json()
         
+    def get_account_details(self) -> dict:
+        """Return all account details associated with the api key.
+        
+        Returns:
+            json of associated account details
+        """
+
+        response = requests.request('GET', AddyApiDetails.URL+'account-details', 
+                                    headers=self._get_headers())
+    
+        return response.json()
