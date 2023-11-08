@@ -21,4 +21,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-api-details = "pyaddy.__main__:main"
+addy = "pyaddy.__main__:cli"
