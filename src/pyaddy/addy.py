@@ -5,17 +5,18 @@ Class for the addy.io python bindings
 import requests
 import configparser
 
-class Addy:
+class AddyApiDetails:
     URL = "https://app.addy.io/api/v1/"
 
     def __init__(self) -> None:
         """Read key from .cfg file throw error if it can't be found."""
-        cfg = configparser.ConfigParser()
-        cfg.read('env.cfg')
-
-        self.api_key = cfg.get('KEYS', 'api_key')
-        if not self.api_key:
-            raise('No api key present')
+        self.api_key = ""
+        try:
+            with open("addy_key.cfg", "r") as f:
+                self.api_key = f.readline()
+        except:
+            if not self.api_key:
+                raise('No api key present: Run load-key')
     
     def _get_headers(self) -> dict:
         """Return headers used for request.
@@ -42,7 +43,7 @@ class Addy:
           If the key is invalid you'll get an unauth error
         """
 
-        response = requests.request('GET', Addy.URL+'api-token-details', 
+        response = requests.request('GET', AddyApiDetails.URL+'api-token-details', 
                                     headers=self._get_headers())
         
         return response.json()
