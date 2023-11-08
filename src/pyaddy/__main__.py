@@ -9,7 +9,7 @@ import json
 from addy import AddyApiDetails
 
 @click.group()
-@click.version_option("0.1.0", prog_name="Addy CLI")
+@click.version_option("0.2.0", prog_name="Addy CLI")
 def cli():
     """Entry point for the cli"""
     pass
