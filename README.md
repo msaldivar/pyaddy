@@ -1,11 +1,12 @@
 # pyaddy
-A Python package/cli to interact with addy.io
+A Python cli to interact with addy.io
 
 
 ## How to use
-* run `python __main__.py --help` or using poetry
-* `poetry run addy --help`
-* You must first run load-key cmd otherwise all other cmds will fail 
+* In your python environment install the package - e.g. using poetry
+* `poetry add pyaddy`
+* `addy --help`
+* You must first run the `load-key` cmd otherwise all other cmds will fail 
 
 ## Example output
 
