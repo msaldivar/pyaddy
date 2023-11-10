@@ -11,7 +11,22 @@ class AddyURL:
     def __init__(self) -> None:
         self.base_url = 'https://app.addy.io/api/v1/{}'
 
-    
+
+    @staticmethod
+    def get_headers(api_key) -> dict:
+        """Return headers used for request.
+        
+        Return:
+            Dict[str]
+        """
+
+        headers = {
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+        }
+
+        return headers
 
     def api_details(self) -> str:
         return self.base_url.format('api-token-details')
@@ -39,4 +54,7 @@ class AddyURL:
     
     def bulk_update_recipients_for_aliases(self) -> str:
         return self.base_url.format('aliases/recipients/bulk')
+    
+    def get_all_aliases(self) -> str:
+        return self.base_url.format('aliases')
     
