@@ -4,7 +4,6 @@ Class for all alias bulk actions
 
 
 import requests
-import json
 
 from pyaddy.API.url import AddyURL
 from pyaddy.API.addy_key import AddyKey
@@ -69,10 +68,3 @@ class AliasBulkActions:
         
         return response.json()
     
-    def bulk_update_recipients_aliases(self, ids: list[str]):
-        """Bulk update recipients for list of aliases"""
-
-        response = requests.request('POST', self.url.bulk_update_recipients_for_aliases(), 
-                                    headers=self.url.get_headers(self.api_key), json=self._build_payload(ids))
-        
-        return response.json()

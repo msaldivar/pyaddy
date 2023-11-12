@@ -34,7 +34,6 @@ cli.add_command(bulk_alias.bulk_activate_aliases)
 cli.add_command(bulk_alias.bulk_deactivate_aliases)
 cli.add_command(bulk_alias.bulk_delete_aliases)
 cli.add_command(bulk_alias.bulk_restore_aliases)
-cli.add_command(bulk_alias.bulk_update_recipients_aliases)
 
 # aliases cmds
 cli.add_command(aliases.get_all_aliases)

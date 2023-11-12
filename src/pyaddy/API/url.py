@@ -12,7 +12,7 @@ class AddyURL:
         self.base_url = 'https://app.addy.io/api/v1/{}'
 
 
-    def get_headers(api_key) -> dict:
+    def get_headers(self, api_key) -> dict:
         """Return headers used for request.
         
         Return:
@@ -73,7 +73,7 @@ class AddyURL:
         return self.base_url.format('aliases/{}/forget')
     
     def activate_alias(self) -> str:
-        return self.base_url.format('activate-aliases')
+        return self.base_url.format('active-aliases')
     
     def deactivate_alias(self) -> str:
-        return self.base_url.format('activate-aliases/{}')
+        return self.base_url.format('active-aliases/{}')

@@ -55,14 +55,16 @@ def create_new_alias(domain, description, format, recipient_id):
 @click.argument('id')
 @click.option('--description', help='Updated description for the alias. NOTE: put descripton in quotes "PyAddy Update" Default: PyAddy Update', default='PyAddy Update')
 @click.option('--from-name', help='Update from_name for alias. NOTE: put from_name in quotes "Leonardo T." Default: Leonardo T.', default='Lenoardo T.')
-def update_specific_alias(id, description, from_me):
-    """Updates a specific alias"""
-
+def update_specific_alias(id, description, from_name):
+    """Update a specific alias descprition and from_name. Pass ID of alias"""
 
     payload = {
         'description': description,
-        'from_me': from_me
+        'from_me': from_name
     }
+
+    resp = Aliases().update_specific_alias(id, payload)
+    click.echo(f'Updated {id} Info: \n {json.dumps(resp, indent=4)}')
 
 @click.command(name='restore_deleted_alias', short_help='Restore a specific deleted alias. Pass ID of alias to retore')
 @click.argument('id')
@@ -78,7 +80,7 @@ def delete_specific_alias(id):
     """Delete a specific alias"""
 
     resp = Aliases().delete_specific_alias(id)
-    click.echo(f'Deleted {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Deleted {id}')
 
 
 @click.command(name='forget-specific-alias', short_help='Forget an alias. Pass ID of alias to forget')
@@ -87,7 +89,7 @@ def forget_specific_alias(id):
     """Forget a specific alias"""
 
     resp = Aliases().forget_specific_alias(id)
-    click.echo(f'Forgot {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Forgot {id}')
 
 @click.command(name='activate-alias', short_help='Activate an alias. Pass ID of alias to activate')
 @click.argument('id')
@@ -106,4 +108,4 @@ def deactivate_alias(id):
     """Deactivate alias"""
 
     resp = Aliases().deactivate_alias(id)
-    click.echo(f'Deactivated {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Deactivated {id}')

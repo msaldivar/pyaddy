@@ -56,13 +56,3 @@ def bulk_restore_aliases(ids):
     resp = AliasBulkActions().bulk_restore_aliases(ids)
 
     click.echo(f'Bulk Restore Aliases Info: \n {json.dumps(resp, indent=4)}')
-
-@click.command(name='bulk-update-recipients-aliases', short_help='Bulk update recipients list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2')
-@click.argument('ids', default=[])
-def bulk_update_recipients_aliases(ids):
-    """Bulk update recipients list of aliases"""
-
-    ids = ids.split(',')
-    resp = AliasBulkActions().bulk_update_recipients_aliases(ids)
-
-    click.echo(f'Bulk Update Recipients Aliases Info: \n {json.dumps(resp, indent=4)}')

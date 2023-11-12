@@ -24,7 +24,7 @@ class Aliases:
     def get_specific_alias(self, id: str) -> dict:
         """Get a specific alias"""
 
-        response = requests.request('GET', self.url, self.get_specific_alias().format(id),
+        response = requests.request('GET', self.url.get_specific_alias().format(id),
                                     headers=self.url.get_headers(self.api_key))
         
         return response.json()
@@ -39,9 +39,10 @@ class Aliases:
     def update_specific_alias(self, id: str, payload: dict) -> dict:
         """Update a specific alias"""
         
-        response = requests.request('PATCH', self.get_specific_alias().format(id), 
-                                    headers=self.url.get_headers(self.api_key))
-        response.json()
+        response = requests.request('PATCH', self.url.get_specific_alias().format(id), 
+                                    headers=self.url.get_headers(self.api_key), json=payload)
+
+        return response.json()
 
     
     def restore_specific_alias(self, id: str) -> dict:
@@ -57,19 +58,21 @@ class Aliases:
         response = requests.request('DELETE', self.url.delete_alias().format(id), 
                                     headers=self.url.get_headers(self.api_key))
         
-        return response.json()
+        if response.status_code != 204:
+            raise(f'Alias {id} not deleted')
 
     def forget_specific_alias(self, id: str) -> dict:
         """Forget a specific alias"""
 
         response = requests.request('DELETE', self.url.forget_alias().format(id),
                                     headers=self.url.get_headers(self.api_key))
-        return response.json()
+        if response.status_code != 204:
+            raise(f'Alias {id} not forgotten')
 
     def activate_alias(self, payload: dict) -> dict:
         """Activate an alias"""
 
-        response = requests.request('POST', self.url.activate_alias, 
+        response = requests.request('POST', self.url.activate_alias(), 
                                     headers=self.url.get_headers(self.api_key), json=payload)
         return response.json()
     
@@ -79,6 +82,7 @@ class Aliases:
 
         response = requests.request('DELETE', self.url.deactivate_alias().format(id),
                                     headers=self.url.get_headers(self.api_key))
-        return response.json()
+        if response.status_code != 204:
+            raise(f'Alias {id} not deactivated')
     
     
