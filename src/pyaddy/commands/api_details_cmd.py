@@ -13,7 +13,7 @@ def check_api_key_details():
 
     click.echo(f'API details: {resp}')
 
-@click.command(name="get-account-details", help="Get all account details associated with api key")
+@click.command(name="get-account-details", short_help="Get all account details associated with api key")
 def get_account_details():
     """Get all account details associated with api key"""
     resp = AddyApiDetails().get_account_details()

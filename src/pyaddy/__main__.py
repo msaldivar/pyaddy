@@ -24,11 +24,27 @@ def load_key(key) -> None:
 
     click.echo(f'Key saved')
 
+# api details cmds
 cli.add_command(api_details.check_api_key_details)
 cli.add_command(api_details.get_account_details)
-cli.add_command(bulk_alias.get_bulk_aliases)
-cli.add_command(aliases.get_all_aliases)
 
+# bulk cmds
+cli.add_command(bulk_alias.get_bulk_aliases)
+cli.add_command(bulk_alias.bulk_activate_aliases)
+cli.add_command(bulk_alias.bulk_deactivate_aliases)
+cli.add_command(bulk_alias.bulk_delete_aliases)
+cli.add_command(bulk_alias.bulk_restore_aliases)
+cli.add_command(bulk_alias.bulk_update_recipients_aliases)
+
+# aliases cmds
+cli.add_command(aliases.get_all_aliases)
+cli.add_command(aliases.get_specific_alias)
+cli.add_command(aliases.create_new_alias)
+cli.add_command(aliases.update_specific_alias)
+cli.add_command(aliases.delete_specific_alias)
+cli.add_command(aliases.forget_specific_alias)
+cli.add_command(aliases.activate_alias)
+cli.add_command(aliases.deactivate_alias)
 
 if __name__ == "__main__":
     cli()

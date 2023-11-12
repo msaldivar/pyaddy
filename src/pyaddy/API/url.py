@@ -12,7 +12,6 @@ class AddyURL:
         self.base_url = 'https://app.addy.io/api/v1/{}'
 
 
-    @staticmethod
     def get_headers(api_key) -> dict:
         """Return headers used for request.
         
@@ -58,3 +57,23 @@ class AddyURL:
     def get_all_aliases(self) -> str:
         return self.base_url.format('aliases')
     
+    def get_specific_alias(self) -> str:
+        return self.base_url.format('aliases/{}')
+    
+    def create_new_alias(self) -> str:
+        return self.base_url.format('aliases/')
+    
+    def restore_specific_alias(self) -> str:
+        return self.base_url.format('aliases/{}/restore')
+    
+    def delete_alias(self) -> str:
+        return self.base_url.format('aliases/{}')
+    
+    def forget_alias(self) -> str:
+        return self.base_url.format('aliases/{}/forget')
+    
+    def activate_alias(self) -> str:
+        return self.base_url.format('activate-aliases')
+    
+    def deactivate_alias(self) -> str:
+        return self.base_url.format('activate-aliases/{}')

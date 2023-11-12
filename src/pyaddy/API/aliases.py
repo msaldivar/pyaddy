@@ -13,22 +13,72 @@ class Aliases:
         self.url = AddyURL()
         self.api_key = AddyKey().load_key()
 
-    def _build_params(self) -> dict:
-
-        params = {
-        # 'filter[deleted]': 'with',
-        'filter[active]': 'true',
-        # 'filter[search]': 'johndoe',
-        'sort': '-created_at',
-        # 'page[number]': '1',
-        # 'page[size]': '10',
-        # 'with': 'recipients',
-        }
-
-    def get_all_aliases(self) -> dict:
-        """"""
+    def get_all_aliases(self, params: dict) -> dict:
+        """Get all ACTIVE aliases SORTED by CREATED_AT"""
 
         response = requests.request('GET', self.url.get_all_aliases(),
-                                    headers=self.url.get_headers(self.api_key), params=self._build_params())
+                                    headers=self.url.get_headers(self.api_key), params=params)
         
         return response.json()
+    
+    def get_specific_alias(self, id: str) -> dict:
+        """Get a specific alias"""
+
+        response = requests.request('GET', self.url, self.get_specific_alias().format(id),
+                                    headers=self.url.get_headers(self.api_key))
+        
+        return response.json()
+    
+    def create_new_alias(self, payload: dict) -> dict:
+        """Creats a new alias"""
+
+        response = requests.request('POST', self.url.create_new_alias(),
+                                     headers=self.url.get_headers(self.api_key), json=payload)
+        return response.json()
+    
+    def update_specific_alias(self, id: str, payload: dict) -> dict:
+        """Update a specific alias"""
+        
+        response = requests.request('PATCH', self.get_specific_alias().format(id), 
+                                    headers=self.url.get_headers(self.api_key))
+        response.json()
+
+    
+    def restore_specific_alias(self, id: str) -> dict:
+        """Restores a specific deleted alias"""
+
+        response = requests.request('PATCH', self.url.restore_specific_alias().format(id), 
+                                    headers=self.url.get_headers(self.api_key))
+        return response.json()
+    
+    def delete_specific_alias(self, id: str) -> dict:
+        """Delete a specific alias"""
+
+        response = requests.request('DELETE', self.url.delete_alias().format(id), 
+                                    headers=self.url.get_headers(self.api_key))
+        
+        return response.json()
+
+    def forget_specific_alias(self, id: str) -> dict:
+        """Forget a specific alias"""
+
+        response = requests.request('DELETE', self.url.forget_alias().format(id),
+                                    headers=self.url.get_headers(self.api_key))
+        return response.json()
+
+    def activate_alias(self, payload: dict) -> dict:
+        """Activate an alias"""
+
+        response = requests.request('POST', self.url.activate_alias, 
+                                    headers=self.url.get_headers(self.api_key), json=payload)
+        return response.json()
+    
+
+    def deactivate_alias(self, id: str) -> dict:
+        """Deactivate alias"""
+
+        response = requests.request('DELETE', self.url.deactivate_alias().format(id),
+                                    headers=self.url.get_headers(self.api_key))
+        return response.json()
+    
+    
