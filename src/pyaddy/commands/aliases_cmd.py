@@ -20,10 +20,10 @@ def get_all_aliases(only_ids):
     resp = Aliases().get_all_aliases(params)
     if only_ids:
         click.echo(f'Alias IDs:')
-        [click.echo(aliases['id'] + ',', nl=False) for aliases in resp['data']]
+        [click.echo(aliases['id'] + ',', nl=False) for aliases in resp.json()['data']]
         click.echo()
     else:
-        click.echo(f'All Aliases: \n {json.dumps(resp, indent=4)}')
+        click.echo(f'All Aliases: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='get-specific-alias', short_help='Get details about a specific alias')
 @click.argument('id')
@@ -31,7 +31,7 @@ def get_specific_alias(id):
     """Get information about a specific alias"""
 
     resp = Aliases().get_specific_alias(id)
-    click.echo(f'Alias Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Alias Info: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='create-new-alias', short_help='see --help for all options')
 @click.option('--domain', help='the domain of the alias. Default addymail.com', default='addymail.com', type=str)
@@ -49,7 +49,7 @@ def create_new_alias(domain, description, format, recipient_id):
     }
 
     resp = Aliases().create_new_alias(payload)
-    click.echo(f'Create New Alias Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Create New Alias Info: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='update-specific-alias', short_help='Update a specific alias descprition and from_name. Pass ID of alias')
 @click.argument('id')
@@ -64,7 +64,7 @@ def update_specific_alias(id, description, from_name):
     }
 
     resp = Aliases().update_specific_alias(id, payload)
-    click.echo(f'Updated {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Updated {id} Info: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='restore_deleted_alias', short_help='Restore a specific deleted alias. Pass ID of alias to retore')
 @click.argument('id')
@@ -72,7 +72,7 @@ def restore_deleted_alias(id):
     """Restores a specific deleted alias"""
 
     resp = Aliases().restore_specific_alias(id)
-    click.echo(f'Restored {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Restored {id} Info: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='delete-specific-alias', short_help='Delete an alias. Pass ID of alias to delete')
 @click.argument('id')
@@ -100,7 +100,7 @@ def activate_alias(id):
         'id': id
     }
     resp = Aliases().activate_alias(payload)
-    click.echo(f'Activated {id} Info: \n {json.dumps(resp, indent=4)}')
+    click.echo(f'Activated {id} Info: \n {json.dumps(resp.json(), indent=4)}')
 
 @click.command(name='deactivate-alias', short_help='Deactivate alias. Pass ID of alias to activate')
 @click.argument('id')

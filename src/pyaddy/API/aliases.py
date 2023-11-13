@@ -19,7 +19,7 @@ class Aliases:
         response = requests.request('GET', self.url.get_all_aliases(),
                                     headers=self.url.get_headers(self.api_key), params=params)
         
-        return response.json()
+        return response
     
     def get_specific_alias(self, id: str) -> dict:
         """Get a specific alias"""
@@ -27,14 +27,14 @@ class Aliases:
         response = requests.request('GET', self.url.get_specific_alias().format(id),
                                     headers=self.url.get_headers(self.api_key))
         
-        return response.json()
+        return response
     
     def create_new_alias(self, payload: dict) -> dict:
         """Creats a new alias"""
 
         response = requests.request('POST', self.url.create_new_alias(),
                                      headers=self.url.get_headers(self.api_key), json=payload)
-        return response.json()
+        return response
     
     def update_specific_alias(self, id: str, payload: dict) -> dict:
         """Update a specific alias"""
@@ -42,7 +42,7 @@ class Aliases:
         response = requests.request('PATCH', self.url.get_specific_alias().format(id), 
                                     headers=self.url.get_headers(self.api_key), json=payload)
 
-        return response.json()
+        return response
 
     
     def restore_specific_alias(self, id: str) -> dict:
@@ -50,7 +50,7 @@ class Aliases:
 
         response = requests.request('PATCH', self.url.restore_specific_alias().format(id), 
                                     headers=self.url.get_headers(self.api_key))
-        return response.json()
+        return response
     
     def delete_specific_alias(self, id: str) -> dict:
         """Delete a specific alias"""
@@ -74,7 +74,7 @@ class Aliases:
 
         response = requests.request('POST', self.url.activate_alias(), 
                                     headers=self.url.get_headers(self.api_key), json=payload)
-        return response.json()
+        return response
     
 
     def deactivate_alias(self, id: str) -> dict:

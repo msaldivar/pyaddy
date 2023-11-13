@@ -3,7 +3,6 @@ Class for the api and account details
 """
 
 import requests
-import json
 
 from pyaddy.API.url import AddyURL
 from pyaddy.API.addy_key import AddyKey
@@ -29,8 +28,7 @@ class AddyApiDetails:
 
         response = requests.request('GET', self.url.api_details(), 
                                     headers=self.url.get_headers(self.api_key))
-        
-        return json.dumps(response.json(), indent=4)
+        return response
         
     def get_account_details(self) -> dict:
         """Return all account details associated with the api key.
@@ -42,4 +40,4 @@ class AddyApiDetails:
         response = requests.request('GET', self.url.account_details(), 
                                     headers=self.url.get_headers(self.api_key))
     
-        return json.dumps(response.json(), indent=4)
+        return response
