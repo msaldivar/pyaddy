@@ -1,12 +1,14 @@
 """
-Pyaddy
+Pyaddy - cli for addy api
 
 Maurice Saldivar
-
 """
 import click
-import json
-from addy import AddyApiDetails
+
+from pyaddy.API.addy_key import AddyKey
+from pyaddy.commands import api_details_cmd as api_details
+from pyaddy.commands import alias_bulk_actions_cmd as bulk_alias
+from pyaddy.commands import aliases_cmd as aliases
 
 @click.group()
 @click.version_option("0.2.0", prog_name="Addy CLI")
@@ -18,26 +20,30 @@ def cli():
 @click.argument("key", type=str)
 def load_key(key) -> None:
     """Grab the addy api key from the user"""
-    with open("addy_key.cfg", "w") as f:
-        f.write(key)
+    AddyKey().write_to_config(key)
 
-    click.echo(f"addy {key} saved to addy_key.cfg")
+    click.echo(f'Key saved')
 
-@cli.command(name="get-api-details", help="Get api details to confirm key is valid")
-def check_api_key_details():
-    """Check the details of the api key"""
-    ac = AddyApiDetails()
-    resp = ac.get_api_token_details()
+# api details cmds
+cli.add_command(api_details.check_api_key_details)
+cli.add_command(api_details.get_account_details)
 
-    click.echo(f"API details: {resp}")
+# bulk cmds
+cli.add_command(bulk_alias.get_bulk_aliases)
+cli.add_command(bulk_alias.bulk_activate_aliases)
+cli.add_command(bulk_alias.bulk_deactivate_aliases)
+cli.add_command(bulk_alias.bulk_delete_aliases)
+cli.add_command(bulk_alias.bulk_restore_aliases)
 
-@cli.command(name="get-acount-details", help="Get all account details associated with api key")
-def get_account_details():
-    """Get all account details associated with api key"""
-    ac = AddyApiDetails()
-    resp = ac.get_account_details()
-
-    click.echo(f"Account Details: \n {json.dumps(resp, indent=4)}")
+# aliases cmds
+cli.add_command(aliases.get_all_aliases)
+cli.add_command(aliases.get_specific_alias)
+cli.add_command(aliases.create_new_alias)
+cli.add_command(aliases.update_specific_alias)
+cli.add_command(aliases.delete_specific_alias)
+cli.add_command(aliases.forget_specific_alias)
+cli.add_command(aliases.activate_alias)
+cli.add_command(aliases.deactivate_alias)
 
 if __name__ == "__main__":
     cli()
