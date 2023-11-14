@@ -43,8 +43,7 @@ class Aliases:
                                     headers=self.url.get_headers(self.api_key), json=payload)
 
         return response
-
-    
+  
     def restore_specific_alias(self, id: str) -> dict:
         """Restores a specific deleted alias"""
 
@@ -60,6 +59,7 @@ class Aliases:
         
         if response.status_code != 204:
             raise(f'Alias {id} not deleted')
+        return response
 
     def forget_specific_alias(self, id: str) -> dict:
         """Forget a specific alias"""
@@ -68,6 +68,7 @@ class Aliases:
                                     headers=self.url.get_headers(self.api_key))
         if response.status_code != 204:
             raise(f'Alias {id} not forgotten')
+        return response
 
     def activate_alias(self, payload: dict) -> dict:
         """Activate an alias"""
@@ -76,7 +77,6 @@ class Aliases:
                                     headers=self.url.get_headers(self.api_key), json=payload)
         return response
     
-
     def deactivate_alias(self, id: str) -> dict:
         """Deactivate alias"""
 
@@ -84,5 +84,6 @@ class Aliases:
                                     headers=self.url.get_headers(self.api_key))
         if response.status_code != 204:
             raise(f'Alias {id} not deactivated')
+        return response
     
     
