@@ -11,7 +11,7 @@ from pyaddy.commands import alias_bulk_actions_cmd as bulk_alias
 from pyaddy.commands import aliases_cmd as aliases
 
 @click.group()
-@click.version_option("0.2.0", prog_name="Addy CLI")
+@click.version_option("0.4.0", prog_name="Addy CLI")
 def cli():
     """Entry point for the cli"""
     pass
