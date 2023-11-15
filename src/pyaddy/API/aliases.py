@@ -3,9 +3,9 @@ Class for alias actions
 """
 
 import requests
-
-from pyaddy.API.url import AddyURL
 from pyaddy.API.addy_key import AddyKey
+from pyaddy.API.url import AddyURL
+
 
 class Aliases:
 
