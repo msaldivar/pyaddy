@@ -4,14 +4,14 @@ Pyaddy - cli for addy api
 Maurice Saldivar
 """
 import click
-
 from pyaddy.API.addy_key import AddyKey
-from pyaddy.commands import api_details_cmd as api_details
 from pyaddy.commands import alias_bulk_actions_cmd as bulk_alias
 from pyaddy.commands import aliases_cmd as aliases
+from pyaddy.commands import api_details_cmd as api_details
+
 
 @click.group()
-@click.version_option("0.5.0", prog_name="Addy CLI")
+@click.version_option("0.5.1", prog_name="Addy CLI")
 def cli():
     """Entry point for the cli"""
     pass

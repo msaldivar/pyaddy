@@ -4,9 +4,9 @@ Class for all alias bulk actions
 
 
 import requests
-
-from pyaddy.API.url import AddyURL
 from pyaddy.API.addy_key import AddyKey
+from pyaddy.API.url import AddyURL
+
 
 class AliasBulkActions:
 
