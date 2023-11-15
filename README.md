@@ -1,23 +1,24 @@
 # pyaddy
-A Python cli to interact with addy.io
+A Python CLI to interact with addy.io
 
 
-## How to use
+## Installing
 * In your python environment install the package - e.g. using poetry
 * `poetry add pyaddy`
 * `addy --help`
-* You must first run the `load-key` cmd otherwise all other cmds will fail 
+* You must first run the `load-key` cmd otherwise all other cmds will fail
+* Note requires 3.11+ 
 
-## Basic Usage
-
+## Basic Usage - see command section for example output
+```
 Usage: addy [OPTIONS] COMMAND [ARGS]...
 
-&nbsp;&nbsp;&nbsp;  Entry point for the cli
+Entry point for the cli
 
-Options: \
-&nbsp;&nbsp;&nbsp;--version  Show the version and exit. \
-&nbsp;&nbsp;&nbsp;--help     Show this message and exit.
-
+Options: 
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+```
 Commands:
  \
   **activate-alias:** \
@@ -469,3 +470,12 @@ Updated 8eb05144-d0a4-4650-8999-5f078b394907 Info:
     }
 }
 ```
+
+## Testing
+From source run:
+```
+pytest tests/
+```  
+
+## Development
+Feel free to open a pr or file an issue. I'm working on adding new features and plan regular releases! 
