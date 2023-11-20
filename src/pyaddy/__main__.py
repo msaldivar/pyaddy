@@ -37,7 +37,7 @@ def load_key(key) -> None:
     KEY api key
     """
     AddyKey().write_to_config(key)
-    click.echo(f'Key saved')
+    click.echo('Key saved')
 
 
 # api details cmds

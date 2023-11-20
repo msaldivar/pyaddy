@@ -21,7 +21,7 @@ class AddyKey:
         try:
             with open(self.full_path, "r") as f:
                 key = f.readline()
-        except:
+        except OSError:
             if not self.api_key:
                 raise('No api key present: Run load-key')
         

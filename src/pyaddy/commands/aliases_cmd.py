@@ -19,7 +19,7 @@ def get_all_aliases(only_ids):
 
     resp = Aliases().get_all_aliases(params)
     if only_ids:
-        click.echo(f'Alias IDs:')
+        click.echo('Alias IDs:')
         [click.echo(aliases['id'] + ',', nl=False) for aliases in resp.json()['data']]
         click.echo()
     else:
@@ -79,7 +79,7 @@ def restore_deleted_alias(id):
 def delete_specific_alias(id):
     """Delete a specific alias"""
 
-    resp = Aliases().delete_specific_alias(id)
+    Aliases().delete_specific_alias(id)
     click.echo(f'Deleted {id}')
 
 
@@ -88,7 +88,7 @@ def delete_specific_alias(id):
 def forget_specific_alias(id):
     """Forget a specific alias"""
 
-    resp = Aliases().forget_specific_alias(id)
+    Aliases().forget_specific_alias(id)
     click.echo(f'Forgot {id}')
 
 @click.command(name='activate-alias', short_help='Activate an alias. Pass ID of alias to activate')
@@ -107,5 +107,5 @@ def activate_alias(id):
 def deactivate_alias(id):
     """Deactivate alias"""
 
-    resp = Aliases().deactivate_alias(id)
+    Aliases().deactivate_alias(id)
     click.echo(f'Deactivated {id}')
