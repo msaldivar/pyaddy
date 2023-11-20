@@ -36,7 +36,7 @@ class TestAliases(unittest.TestCase):
         assert resp.status_code == 201, f'API creating a new alias did not return 201: {resp.status_code}'
         assert details['data']['domain'] == 'addymail.com', f'Alias domain not set: {details["data"]["domain"]}'
         assert details['data']['description'] == 'addy pytest', f'Alias description not set: {details["data"]["description"]}'
-        assert details['data']['from_name'] == None, f'Alias from_name not None: {details["data"]["from_name"]}'
+        assert details['data']['from_name'] is None, f'Alias from_name not None: {details["data"]["from_name"]}'
         
         # Test getting a specific alias
         resp = self.aliases.get_specific_alias(alias_id)

@@ -11,11 +11,15 @@ A Python CLI to interact with addy.io
 
 ## Basic Usage - see command section for example output
 ```
-Usage: addy [OPTIONS] COMMAND [ARGS]...
+Usage: addy <command> <subcommand> [options & parameters]
 
-Entry point for the cli
+  CLI tool to interact with addy.io api:
 
-Options: 
+  Run load_key first to add api key:
+
+  addy load_ley <key goes here>
+
+Options:
   --version  Show the version and exit.
   --help     Show this message and exit.
 ```
@@ -23,6 +27,9 @@ Commands:
  \
   **activate-alias:** \
   Activate an alias. Pass ID of alias to activate
+
+  **api:**\
+  Invoke details about the provided api key
 
   **bulk-activate-aliases:** \
   Bulk activate list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2
@@ -48,14 +55,8 @@ Commands:
   **forget-specific-alias:** \
   Forget an alias. Pass ID of alias to forget
 
-  **get-account-details:** \
-  Get all account details associated with api key
-
   **get-all-aliases:** \
   Default: Get details about all ACTIVE aliases SORTED by CREATED_AT. --help to see all options and filtering
-
-  **get-api-details:** \
-  Get api details to confirm key is valid
 
   **get-bulk-aliases:** \
   Get detailed info on aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2
@@ -64,7 +65,7 @@ Commands:
   Get details about a specific alias
 
   **load-key:** \
-  Supply your addy api-key
+  Load api key.
 
   **update-specific-alias:** \
   Update a specific alias descprition and from_name. Pass ID of alias
@@ -212,7 +213,7 @@ Forgot 50c9e585-e7f5-41c4-9016-9014c15454bc
 
 ### get-account-details
 ```
-addy get-account-details
+addy api account-details
 
 Account Details:
 {
@@ -351,7 +352,7 @@ All Aliases:
 
 ### get-api-details
 ```
-addy get-api-details
+addy api api-details
 API details: {
     "name": "Firefox Extension",
     "created_at": "2019-10-01 09:00:00",
