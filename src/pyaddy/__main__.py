@@ -4,29 +4,44 @@ Pyaddy - cli for addy api
 Maurice Saldivar
 """
 import click
+from click.core import Context
+from click.formatting import HelpFormatter
 from pyaddy.API.addy_key import AddyKey
 from pyaddy.commands import alias_bulk_actions_cmd as bulk_alias
 from pyaddy.commands import aliases_cmd as aliases
 from pyaddy.commands import api_details_cmd as api_details
 
 
-@click.group()
-@click.version_option("0.5.1", prog_name="Addy CLI")
+class CliGroup(click.Group):
+    def format_usage(self, ctx: Context, formatter: HelpFormatter) -> None:
+        click.echo("Usage: addy <command> <subcommand> [options & parameters]\n")
+
+
+@click.group(cls=CliGroup)
+@click.version_option("0.5.2", prog_name="Addy CLI")
 def cli():
-    """Entry point for the cli"""
+    """CLI tool to interact with addy.io api:\n
+    
+    Run load_key first to add api key:
+
+    addy load_ley <key goes here>
+    """
     pass
 
-@cli.command(name="load-key", help="Supply your addy api-key")
+
+@cli.command(name="load-key")
 @click.argument("key", type=str)
 def load_key(key) -> None:
-    """Grab the addy api key from the user"""
+    """Load api key. 
+    
+    KEY api key
+    """
     AddyKey().write_to_config(key)
+    click.echo('Key saved')
 
-    click.echo(f'Key saved')
 
 # api details cmds
-cli.add_command(api_details.check_api_key_details)
-cli.add_command(api_details.get_account_details)
+cli.add_command(api_details.api)
 
 # bulk cmds
 cli.add_command(bulk_alias.get_bulk_aliases)
