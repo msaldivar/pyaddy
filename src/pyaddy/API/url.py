@@ -31,6 +31,9 @@ class AddyURL:
 
     def account_details(self) -> str:
         return self.base_url.format("account-details")
+    
+    def app_version(self) -> str:
+        return self.base_url.format("app-version")
 
     def bulk_get_aliases(self) -> str:
         return self.base_url.format("aliases/get/bulk")

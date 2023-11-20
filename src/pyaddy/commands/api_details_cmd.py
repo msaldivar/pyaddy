@@ -13,7 +13,7 @@ def api():
     """Invoke details about the provided api key"""
 
 
-@api.command(name="api-details")
+@api.command(name="details")
 def check_api_key_details():
     """Check the details of the api key"""
     resp = AddyApiDetails().get_api_details()
@@ -27,3 +27,12 @@ def get_account_details():
     resp = AddyApiDetails().get_account_details()
 
     click.echo(f"Account Details: \n {json.dumps(resp.json(), indent=4)}")
+
+# TODO:
+# Consistantly returns 404. Have tested using the browser, directly with requests. Reaching out to dev team 
+# @api.command(name="version")
+# def get_api_version():
+#     """Get current addy.io api version"""
+#     resp = AddyApiDetails().get_app_version()
+#     breakpoint()
+#     click.echo(f"Api Version: \n {json.dumps(resp.json(), indent=4)}")

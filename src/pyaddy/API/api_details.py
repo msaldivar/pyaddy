@@ -26,8 +26,11 @@ class AddyApiDetails:
         """
 
         response = requests.request(
-            "GET", self.url.api_details(), headers=self.url.get_headers(self.api_key)
+            "GET", 
+            self.url.api_details(), 
+            headers=self.url.get_headers(self.api_key)
         )
+
         return response
 
     def get_account_details(self) -> dict:
@@ -40,6 +43,21 @@ class AddyApiDetails:
         response = requests.request(
             "GET",
             self.url.account_details(),
+            headers=self.url.get_headers(self.api_key),
+        )
+
+        return response
+    
+    def get_app_version(self) -> dict:
+        """Get the current addy.io app version
+        
+        Returns:
+            json of api version
+        """
+        breakpoint()
+        response = requests.request(
+            "GET",
+            self.url.app_version(),
             headers=self.url.get_headers(self.api_key),
         )
 
