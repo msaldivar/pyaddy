@@ -7,105 +7,186 @@ import json
 from pyaddy.API.aliases import Aliases
 
 
-@click.command(name='get-all-aliases', short_help='Default: Get details about all ACTIVE aliases SORTED by CREATED_AT. --help to see all options and filtering')
-@click.option('--only-ids', help='only show IDs', is_flag=True)
+@click.group()
+def alias():
+    """Invoke alias commands: --help for details
+
+    addy alias <subcommand>"""
+
+
+@alias.command(
+    name="get-all",
+    short_help="Get details about all ACTIVE aliases SORTED by CREATED_AT. OPTION: --only-ids",
+)
+@click.option("--only-ids", help="only show IDs", is_flag=True)
 def get_all_aliases(only_ids):
-    """Default: Get all ACTIVE aliases SORTED by CREATED_AT"""
+    """Get all aliases
+
+    Default: Get all ACTIVE aliases SORTED by CREATED_AT:\n
+    Usage:\n
+
+    addy alias get-all\n
+    addy alias get-all --only-ids
+    """
+
     # TODO: look into filter options
     params = {
-        'filter[active]': 'true',
-        'sort': '-created_at',
+        "filter[active]": "true",
+        "sort": "-created_at",
     }
 
     resp = Aliases().get_all_aliases(params)
     if only_ids:
-        click.echo('Alias IDs:')
-        [click.echo(aliases['id'] + ',', nl=False) for aliases in resp.json()['data']]
+        click.echo("Alias IDs:")
+        [click.echo(aliases["id"] + ",", nl=False) for aliases in resp.json()["data"]]
         click.echo()
     else:
-        click.echo(f'All Aliases: \n {json.dumps(resp.json(), indent=4)}')
+        click.echo(f"All Aliases: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='get-specific-alias', short_help='Get details about a specific alias')
-@click.argument('id')
+
+@alias.command("get", short_help="Get ID details")
+@click.argument("id")
 def get_specific_alias(id):
-    """Get information about a specific alias"""
+    """Get ID details
+
+    Usage:\n
+    addy alias get UUID
+    """
 
     resp = Aliases().get_specific_alias(id)
-    click.echo(f'Alias Info: \n {json.dumps(resp.json(), indent=4)}')
+    click.echo(f"Alias Info: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='create-new-alias', short_help='see --help for all options')
-@click.option('--domain', help='the domain of the alias. Default addymail.com', default='addymail.com', type=str)
-@click.option('--description', help='the description of the alias. NOTE: put descripton in quotes "Descriptoin Foo Bar" ', type=str)
-@click.option('--format', help='chosen format for the alias: random_characters, uuid, or random_words', type=str)
-@click.option('--recipient-id', help='recipient id to add. Default recipient will be used if non is provided', type=str)
+
+@alias.command(name="new", short_help="Create a new alias. --help for all options")
+@click.option(
+    "--domain",
+    help="the domain of the alias. Default addymail.com",
+    default="addymail.com",
+    type=str,
+)
+@click.option(
+    "--description",
+    help='the description of the alias. NOTE: put descripton in quotes "Descriptoin Foo Bar" ',
+    type=str,
+)
+@click.option(
+    "--format",
+    help="chosen format for the alias: random_characters, uuid, or random_words",
+    type=str,
+)
+@click.option(
+    "--recipient-id",
+    help="recipient id to add. Default recipient will be used if non is provided",
+    type=str,
+)
 def create_new_alias(domain, description, format, recipient_id):
-    """Create a new alias"""
+    """Create a new alias
+
+    Usage:\n
+    addy alias new
+
+    addy alias new --domain addymail.com --description "addy created" --format random_words
+    """
 
     payload = {
-        'domain': domain,
-        'description': description,
-        'format': format,
-        'recipient_id': recipient_id
+        "domain": domain,
+        "description": description,
+        "format": format,
+        "recipient_id": recipient_id,
     }
 
     resp = Aliases().create_new_alias(payload)
-    click.echo(f'Create New Alias Info: \n {json.dumps(resp.json(), indent=4)}')
+    click.echo(f"Create New Alias Info: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='update-specific-alias', short_help='Update a specific alias descprition and from_name. Pass ID of alias')
-@click.argument('id')
-@click.option('--description', help='Updated description for the alias. NOTE: put descripton in quotes "PyAddy Update" Default: PyAddy Update', default='PyAddy Update')
-@click.option('--from-name', help='Update from_name for alias. NOTE: put from_name in quotes "Leonardo T." Default: Leonardo T.', default='Lenoardo T.')
+
+@alias.command(name="update", short_help='Update alias "descprition" and "from_name"')
+@click.argument("id")
+@click.option(
+    "--description",
+    help='Updated DESCRIPTION: NOTE: put string in quotes: "PyAddy Update" Default: PyAddy Update',
+    default="PyAddy Update",
+)
+@click.option(
+    "--from-name",
+    help='Updated FROM_NAME: NOTE: put string in quotes "Leonardo T." Default: Leonardo T.',
+    default="Lenoardo T.",
+)
 def update_specific_alias(id, description, from_name):
-    """Update a specific alias descprition and from_name. Pass ID of alias"""
+    """Update alias "descprition" and "from_name"
 
-    payload = {
-        'description': description,
-        'from_me': from_name
-    }
+    Usage:\n
+
+    addy alias update UUID --description "foo addy" --from-name "bar addy"
+
+    """
+
+    payload = {"description": description, "from_me": from_name}
 
     resp = Aliases().update_specific_alias(id, payload)
-    click.echo(f'Updated {id} Info: \n {json.dumps(resp.json(), indent=4)}')
+    click.echo(f"Updated {id} Info: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='restore_deleted_alias', short_help='Restore a specific deleted alias. Pass ID of alias to retore')
-@click.argument('id')
+
+@alias.command(name="restore", short_help="Restore alias ID")
+@click.argument("id")
 def restore_deleted_alias(id):
-    """Restores a specific deleted alias"""
+    """Restore an alias ID
+
+    Usage:\n
+    addy alias restore UUID
+    """
 
     resp = Aliases().restore_specific_alias(id)
-    click.echo(f'Restored {id} Info: \n {json.dumps(resp.json(), indent=4)}')
+    click.echo(f"Restored {id} Info: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='delete-specific-alias', short_help='Delete an alias. Pass ID of alias to delete')
-@click.argument('id')
+
+@alias.command(name="delete", short_help="Delete alias ID")
+@click.argument("id")
 def delete_specific_alias(id):
-    """Delete a specific alias"""
+    """Delete an alias ID
+
+    Usage:\n
+    addy alias delete UUID
+    """
 
     Aliases().delete_specific_alias(id)
-    click.echo(f'Deleted {id}')
+    click.echo(f"Deleted {id}")
 
 
-@click.command(name='forget-specific-alias', short_help='Forget an alias. Pass ID of alias to forget')
-@click.argument('id')
+@alias.command(name="forget", short_help="Forget alias ID")
+@click.argument("id")
 def forget_specific_alias(id):
-    """Forget a specific alias"""
+    """Forget an alias ID
+
+    Usage:\n
+    addy alias forget UUID
+    """
 
     Aliases().forget_specific_alias(id)
-    click.echo(f'Forgot {id}')
+    click.echo(f"Forgot {id}")
 
-@click.command(name='activate-alias', short_help='Activate an alias. Pass ID of alias to activate')
-@click.argument('id')
+
+@alias.command(name="activate", short_help="Activate alias ID")
+@click.argument("id")
 def activate_alias(id):
-    """Activate an alias"""
+    """Activate an alias ID
 
-    payload = {
-        'id': id
-    }
+    Usage:\n
+    addy alias activate UUID
+    """
+
+    payload = {"id": id}
     resp = Aliases().activate_alias(payload)
-    click.echo(f'Activated {id} Info: \n {json.dumps(resp.json(), indent=4)}')
+    click.echo(f"Activated {id} Info: \n {json.dumps(resp.json(), indent=4)}")
 
-@click.command(name='deactivate-alias', short_help='Deactivate alias. Pass ID of alias to activate')
-@click.argument('id')
+
+@alias.command(name="deactivate", short_help="Deactivate alias ID")
+@click.argument("id")
 def deactivate_alias(id):
-    """Deactivate alias"""
+    """Deactivate alias ID
+
+    Usage:\n
+    addy alias deactivate UUID
+    """
 
     Aliases().deactivate_alias(id)
-    click.echo(f'Deactivated {id}')
+    click.echo(f"Deactivated {id}")
