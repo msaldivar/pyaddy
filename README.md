@@ -22,6 +22,12 @@ Usage: addy <command> <subcommand> [options & parameters]
 Options:
   --version  Show the version and exit.
   --help     Show this message and exit.
+
+Commands:
+  load-key  Load api key.
+  api       Invoke details about the provided api key
+  alias     Invoke alias commands: --help for details
+  bulk      Invoke bulk alias commands: --help for details
 ```
 Commands:
  \
