@@ -17,7 +17,7 @@ def bulk():
 
 @bulk.command(
     name="get-aliases",
-    short_help="Get detailed info on aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2. --help for more info",
+    short_help="Get detailed info on aliases. Supply a comma-seperated list of alias IDs -e.g. ID1,ID2. --help for more info",
 )
 @click.argument("ids")
 def get_bulk_aliases(ids):
@@ -37,7 +37,7 @@ def get_bulk_aliases(ids):
 
 @bulk.command(
     name="activate",
-    short_help="Bulk activate list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2. --help for more info",
+    short_help="Bulk activate list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1,ID2. --help for more info",
 )
 @click.argument("ids")
 def bulk_activate_aliases(ids):
@@ -57,7 +57,7 @@ def bulk_activate_aliases(ids):
 
 @bulk.command(
     name="deactivate",
-    short_help="Bulk deactivate list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2. --help for more info",
+    short_help="Bulk deactivate list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1,ID2. --help for more info",
 )
 @click.argument("ids")
 def bulk_deactivate_aliases(ids):
@@ -77,7 +77,7 @@ def bulk_deactivate_aliases(ids):
 
 @bulk.command(
     name="delete",
-    short_help="Bulk delete list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2. --help for more info",
+    short_help="Bulk delete list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1,ID2. --help for more info",
 )
 @click.argument("ids")
 def bulk_delete_aliases(ids):
@@ -97,7 +97,7 @@ def bulk_delete_aliases(ids):
 
 @bulk.command(
     name="restore",
-    short_help="Bulk restore list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1, ID2. --help for more info",
+    short_help="Bulk restore list of aliases. Supply a comma-seperated list of alias IDs -e.g. ID1,ID2. --help for more info",
 )
 @click.argument("ids")
 def bulk_restore_aliases(ids):

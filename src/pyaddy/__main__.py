@@ -21,7 +21,7 @@ class CliGroup(click.Group):
 
 
 @click.group(cls=CliGroup)
-@click.version_option("0.5.3", prog_name="Addy CLI")
+@click.version_option("0.5.4", prog_name="Addy CLI")
 def cli():
     """CLI tool to interact with addy.io api:\n
 
