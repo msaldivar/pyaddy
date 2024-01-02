@@ -10,6 +10,7 @@ from pyaddy.API.addy_key import AddyKey
 from pyaddy.commands import alias_bulk_actions_cmd as bulk_alias
 from pyaddy.commands import aliases_cmd as aliases
 from pyaddy.commands import api_details_cmd as api_details
+from pyaddy.commands import domain_cmd as domain
 
 
 class CliGroup(click.Group):
@@ -51,6 +52,9 @@ cli.add_command(aliases.alias)
 
 # bulk cmds
 cli.add_command(bulk_alias.bulk)
+
+# domain cmds
+cli.add_command(domain.domain)
 
 if __name__ == "__main__":
     cli()

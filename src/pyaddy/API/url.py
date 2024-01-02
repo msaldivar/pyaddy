@@ -76,3 +76,6 @@ class AddyURL:
 
     def deactivate_alias(self) -> str:
         return self.base_url.format("active-aliases/{}")
+
+    def get_all_domain_options(self) -> str:
+        return self.base_url.format("domain-options")
