@@ -13,7 +13,7 @@ def domain():
     addy domain <subcommand>
     """
 
-@domain.command(name="get-all-domain-options",
+@domain.command(name="all-options",
                 short_help="retrieves all domain options")
 def get_all_domain_options():
     """Retrieve all domain options"""
