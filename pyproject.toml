@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyaddy"
-version = "0.5.4"
+version = "0.5.5"
 description = "A Python package/cli to interact with addy.io"
 authors = ["Maurice Saldivar <mo.py.solutions@gmail.com>"]
 license = "GNU AFFERO GENERAL PUBLIC LICENSE"
