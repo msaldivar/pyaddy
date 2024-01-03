@@ -109,5 +109,10 @@ From source run:
 pytest tests/
 ```  
 
+## TODO:
+* get ruff working on actions - currently only local
+* mock api calls
+* integrate all addy.io api into cli cmds 
+
 ## Development
 Feel free to open a pr or file an issue. I'm working on adding new features and plan regular releases! 
