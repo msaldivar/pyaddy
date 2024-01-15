@@ -21,8 +21,16 @@ class Domain:
     
     def get_all_domains(self) -> dict:
         """Retrieves all domains"""
-        breakpoint()
+        
         response = requests.request(
             "GET", self.url.get_all_domains(), headers=self.url.get_headers(self.api_key)
+        )
+        return response
+
+    def get_specific_domain(self, id) -> dict:
+        """Get a specific domain"""
+
+        response = requests.request(
+            "GET", self.url.get_specific_domain(id), headers=self.url.get_headers(self.api_key)
         )
         return response

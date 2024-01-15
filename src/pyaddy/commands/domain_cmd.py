@@ -29,4 +29,17 @@ def get_all_domains():
     resp = Domain().get_all_domains()
     click.echo(f"All Domains: \n {json.dumps(resp.json(), indent=4)}")
 
+@domain.command(name="get",
+                short_help="get details of a specific domain ID")
+@click.argument("id")
+def get_specific_domain(id):
+    """Get the details of a specific domain id
+    
+    Usage: \n
+    addy domain get 0ad7a75a-1517-4b86-bb8a-9443d4965e60
+    """
+
+    resp = Domain().get_specific_domain(id)
+    click.echo(f"All Domains: \n {json.dumps(resp.json(), indent=4)}")
+
 
