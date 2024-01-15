@@ -79,3 +79,6 @@ class AddyURL:
 
     def get_all_domain_options(self) -> str:
         return self.base_url.format("domain-options")
+
+    def get_all_domains(self) -> str:
+        return self.base_url.format("domains")

@@ -20,3 +20,13 @@ def get_all_domain_options():
 
     resp = Domain().get_all_domain_options()
     click.echo(f"All Domain Options: \n {json.dumps(resp.json(), indent=4)}")
+
+@domain.command(name="all",
+                short_help="retrieves all domains")
+def get_all_domains():
+    """Retrieve all domains"""
+
+    resp = Domain().get_all_domains()
+    click.echo(f"All Domains: \n {json.dumps(resp.json(), indent=4)}")
+
+
