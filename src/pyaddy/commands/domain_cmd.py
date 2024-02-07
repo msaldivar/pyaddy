@@ -45,8 +45,7 @@ def get_specific_domain(id):
 
 @domain.command(name="create-new",
                 short_help="create a new domain with the given NAME")
-@click.argument("name",
-                short_help="A new domain will be created with [name]" )
+@click.argument("name")
 def create_new_domain(name: str):
     """Create a new domain with the given NAME
 
