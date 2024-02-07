@@ -66,7 +66,7 @@ def get_specific_alias(id):
 )
 @click.option(
     "--description",
-    help='the description of the alias. NOTE: put descripton in quotes "Descriptoin Foo Bar" ',
+    help='the description of the alias. NOTE: put description in quotes "Description Foo Bar" ',
     type=str,
 )
 @click.option(

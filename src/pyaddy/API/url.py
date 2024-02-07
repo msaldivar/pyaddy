@@ -85,3 +85,6 @@ class AddyURL:
     
     def get_specific_domain(self) -> str:
         return self.base_url.format("/domains/{}")
+
+    def create_new_domain(self) -> str:
+        return self.base_url.format("domains")
